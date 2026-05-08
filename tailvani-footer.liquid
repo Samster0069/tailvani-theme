@@ -1,0 +1,88 @@
+<footer class="tv-footer">
+  <div class="tv-footer__inner">
+    <div class="tv-footer__top">
+      <div>
+        <a class="tv-footer__logo" href="{{ routes.root_url }}">{{ shop.name }}</a>
+        <p class="tv-footer__tagline">{{ section.settings.tagline }}</p>
+        <div class="tv-footer__socials">
+          {% if section.settings.instagram != blank %}
+            <a class="tv-footer__social" href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.tiktok != blank %}
+            <a class="tv-footer__social" href="{{ section.settings.tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.27 6.27 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34v-7a8.19 8.19 0 0 0 4.77 1.52V6.38a4.85 4.85 0 0 1-1-.31z"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.facebook != blank %}
+            <a class="tv-footer__social" href="{{ section.settings.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">
+              <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+          {% endif %}
+          {% if section.settings.pinterest != blank %}
+            <a class="tv-footer__social" href="{{ section.settings.pinterest }}" target="_blank" rel="noopener" aria-label="Pinterest">
+              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/><path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32"/></svg>
+            </a>
+          {% endif %}
+        </div>
+      </div>
+
+      <div>
+        <div class="tv-footer__col-title">{{ section.settings.col2_title }}</div>
+        <ul class="tv-footer__links">
+          {% for link in section.settings.menu_shop.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div>
+        <div class="tv-footer__col-title">{{ section.settings.col3_title }}</div>
+        <ul class="tv-footer__links">
+          {% for link in section.settings.menu_help.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <div>
+        <div class="tv-footer__col-title">{{ section.settings.col4_title }}</div>
+        <ul class="tv-footer__links">
+          {% for link in section.settings.menu_company.links %}
+            <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="tv-footer__bottom">
+      <div class="tv-footer__copy">© {{ 'now' | date: '%Y' }} {{ shop.name }}. All rights reserved. Powered by Shopify.</div>
+      <div class="tv-footer__payments">
+        {% for type in shop.enabled_payment_types %}
+          <span class="tv-payment-pill">{{ type | payment_type_svg_tag }}</span>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "TV Footer",
+  "settings": [
+    { "type": "text", "id": "tagline", "label": "Tagline", "default": "The pet fashion brand for the millennial dog parent. Where pet style meets vanity." },
+    { "type": "url", "id": "instagram", "label": "Instagram URL" },
+    { "type": "url", "id": "tiktok", "label": "TikTok URL" },
+    { "type": "url", "id": "facebook", "label": "Facebook URL" },
+    { "type": "url", "id": "pinterest", "label": "Pinterest URL" },
+    { "type": "text", "id": "col2_title", "label": "Column 2 title", "default": "Shop" },
+    { "type": "link_list", "id": "menu_shop", "label": "Shop menu" },
+    { "type": "text", "id": "col3_title", "label": "Column 3 title", "default": "Help" },
+    { "type": "link_list", "id": "menu_help", "label": "Help menu" },
+    { "type": "text", "id": "col4_title", "label": "Column 4 title", "default": "Company" },
+    { "type": "link_list", "id": "menu_company", "label": "Company menu" }
+  ],
+  "presets": [{ "name": "TV Footer" }]
+}
+{% endschema %}

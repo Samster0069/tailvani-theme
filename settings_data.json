@@ -1,0 +1,16 @@
+{
+  "current": {
+    "colors_solid_button_labels": "#F5F0E8",
+    "colors_accent_1": "#8C6E52",
+    "colors_accent_2": "#C4523A",
+    "colors_text": "#2A2420",
+    "colors_outline_button_labels": "#3D2B1F",
+    "colors_background_1": "#FDFAF5",
+    "colors_background_2": "#F5F0E8",
+    "colors_button": "#3D2B1F",
+    "type_header_font": "cormorant_garamond_n3",
+    "type_body_font": "dm_sans_n4",
+    "favicon": ""
+  },
+  "presets": {}
+}

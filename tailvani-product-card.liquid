@@ -1,0 +1,95 @@
+{% comment %}
+  tailvani-product-card.liquid
+  WHERE: Snippets/ → Add new snippet → name: tailvani-product-card
+  USAGE: {% render 'tailvani-product-card', product: product %}
+{% endcomment %}
+
+{% assign first_variant = product.first_available_variant | default: product.variants.first %}
+{% assign is_on_sale = false %}
+{% if first_variant.compare_at_price > first_variant.price %}
+  {% assign is_on_sale = true %}
+{% endif %}
+{% assign is_new = false %}
+{% if product.tags contains 'new-arrival' or product.tags contains 'new' %}
+  {% assign is_new = true %}
+{% endif %}
+
+<div class="tv-product-card" data-category="{{ product.tags | join: ' ' }}">
+  <div class="tv-card__frame">
+    {%- if is_on_sale -%}
+      <span class="tv-card__badge tv-card__badge--sale">Sale</span>
+    {%- elsif is_new -%}
+      <span class="tv-card__badge tv-card__badge--new">New</span>
+    {%- endif -%}
+
+    <button class="tv-card__wishlist" aria-label="Save {{ product.title }} to wishlist">
+      <svg viewBox="0 0 24 24">
+        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+      </svg>
+    </button>
+
+    <a href="{{ product.url }}">
+      {% if product.images.size > 0 %}
+        <img
+          class="tv-card__img-primary"
+          src="{{ product.featured_image | image_url: width: 600 }}"
+          alt="{{ product.featured_image.alt | default: product.title }}"
+          loading="lazy"
+          width="600"
+          height="800"
+        />
+        {% if product.images.size > 1 %}
+          <img
+            class="tv-card__img-secondary"
+            src="{{ product.images[1] | image_url: width: 600 }}"
+            alt="{{ product.images[1].alt | default: product.title }}"
+            loading="lazy"
+            width="600"
+            height="800"
+          />
+        {% endif %}
+      {% else %}
+        <div style="width:100%;height:100%;background:var(--tv-sand);display:flex;align-items:center;justify-content:center;font-size:40px">🐾</div>
+      {% endif %}
+    </a>
+
+    <button
+      class="tv-card__quick-add"
+      onclick="window.location='{{ product.url }}'"
+    >
+      {% if product.available %}
+        Quick Add
+      {% else %}
+        View Product
+      {% endif %}
+    </button>
+  </div>
+
+  <div class="tv-card__info">
+    <a class="tv-card__name" href="{{ product.url }}">{{ product.title }}</a>
+    <div class="tv-card__meta">
+      <div class="tv-card__price">
+        {%- if is_on_sale -%}
+          <s>{{ first_variant.compare_at_price | money }}</s>
+          <span class="tv-card__price-sale">{{ first_variant.price | money }}</span>
+        {%- else -%}
+          {{ first_variant.price | money }}
+        {%- endif -%}
+      </div>
+
+      {%- assign color_option = product.options_by_name['Color'] -%}
+      {%- if color_option -%}
+        <div class="tv-card__swatches">
+          {%- for value in color_option.values -%}
+            {%- assign swatch_class = value | downcase | replace: ' ', '-' -%}
+            <span
+              class="tv-swatch tv-swatch--{{ swatch_class }}{% if forloop.first %} is-active{% endif %}"
+              title="{{ value }}"
+              aria-label="{{ value }}"
+            ></span>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

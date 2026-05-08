@@ -1,0 +1,28 @@
+<div style="max-width:900px;margin:0 auto;padding:60px 40px 100px">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:300;color:#3D2B1F;margin-bottom:48px">{{ blog.title }}</h1>
+  <div style="display:grid;gap:40px">
+    {% for article in blog.articles %}
+      <article style="border-bottom:1px solid #E8DFD0;padding-bottom:40px">
+        {% if article.image %}
+          <a href="{{ article.url }}">
+            <img src="{{ article.image | image_url: width: 800 }}" alt="{{ article.image.alt }}" width="800" height="450" style="width:100%;border-radius:3px;object-fit:cover;margin-bottom:20px"/>
+          </a>
+        {% endif %}
+        <p style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#8C6E52;margin-bottom:10px">{{ article.published_at | date: '%B %d, %Y' }}</p>
+        <h2 style="font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:#3D2B1F;margin-bottom:12px">
+          <a href="{{ article.url }}" style="text-decoration:none;color:inherit">{{ article.title }}</a>
+        </h2>
+        <p style="font-size:15px;line-height:1.75;color:#6B5B4E;margin-bottom:20px">{{ article.excerpt | strip_html | truncate: 160 }}</p>
+        <a href="{{ article.url }}" style="font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;color:#8C6E52;text-decoration:none;border-bottom:1px solid #C4B49A;padding-bottom:2px">Read More →</a>
+      </article>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blog",
+  "settings": [],
+  "presets": [{ "name": "Blog" }]
+}
+{% endschema %}

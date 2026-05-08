@@ -1,0 +1,66 @@
+<section class="tv-hero">
+  <div class="tv-hero__content">
+    <div class="tv-hero__eyebrow">{{ section.settings.eyebrow }}</div>
+    <h1 class="tv-hero__headline">{{ section.settings.headline }}</h1>
+    <p class="tv-hero__sub">{{ section.settings.subtext }}</p>
+    <div class="tv-hero__actions">
+      <a class="tv-btn-primary" href="{{ section.settings.btn1_url }}">
+        {{ section.settings.btn1_label }}
+        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" fill="none" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+      {% if section.settings.btn2_label != blank %}
+        <a class="tv-btn-ghost" href="{{ section.settings.btn2_url }}">{{ section.settings.btn2_label }} →</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="tv-hero__visual">
+    <div class="tv-hero__frame">
+      {% if section.settings.hero_image %}
+        <img
+          src="{{ section.settings.hero_image | image_url: width: 900 }}"
+          alt="{{ section.settings.hero_image.alt | default: 'Tailvani Collection' }}"
+          width="900"
+          height="1125"
+          loading="eager"
+        />
+      {% endif %}
+    </div>
+    {% if section.settings.badge_title != blank %}
+      <div class="tv-hero__badge">
+        <div class="tv-hero__badge-icon">{{ section.settings.badge_icon }}</div>
+        <div class="tv-hero__badge-text">
+          <strong>{{ section.settings.badge_title }}</strong>
+          <span>{{ section.settings.badge_sub }}</span>
+        </div>
+      </div>
+    {% endif %}
+    {% if section.settings.hero_tag != blank %}
+      <div class="tv-hero__tag">{{ section.settings.hero_tag }}</div>
+    {% endif %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TV Hero",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow text", "default": "New Collection — Spring 2026" },
+    { "type": "textarea", "id": "headline", "label": "Headline", "default": "Dressed for every moment, tail and all." },
+    { "type": "textarea", "id": "subtext", "label": "Subtext", "default": "Tailvani is the pet fashion brand built for the millennial dog parent." },
+    { "type": "text", "id": "btn1_label", "label": "Button 1 label", "default": "Shop the Collection" },
+    { "type": "url", "id": "btn1_url", "label": "Button 1 URL" },
+    { "type": "text", "id": "btn2_label", "label": "Button 2 label", "default": "Our Story" },
+    { "type": "url", "id": "btn2_url", "label": "Button 2 URL" },
+    { "type": "image_picker", "id": "hero_image", "label": "Hero image" },
+    { "type": "text", "id": "hero_tag", "label": "Image tag", "default": "New Arrivals" },
+    { "type": "text", "id": "badge_icon", "label": "Badge icon (emoji)", "default": "🐾" },
+    { "type": "text", "id": "badge_title", "label": "Badge title", "default": "Minimal Design" },
+    { "type": "text", "id": "badge_sub", "label": "Badge subtitle", "default": "Premium pet fashion" }
+  ],
+  "presets": [{ "name": "TV Hero" }]
+}
+{% endschema %}

@@ -1,0 +1,78 @@
+<section class="tv-brand">
+  <div class="tv-brand__inner">
+    <div>
+      <div class="tv-brand__eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="tv-brand__title">{{ section.settings.title }}</h2>
+      <p class="tv-brand__body">{{ section.settings.body1 }}</p>
+      {% if section.settings.body2 != blank %}
+        <p class="tv-brand__body">{{ section.settings.body2 }}</p>
+      {% endif %}
+      {% if section.settings.cta_label != blank %}
+        <a class="tv-btn-primary" href="{{ section.settings.cta_url }}" style="margin-top:20px;display:inline-flex">{{ section.settings.cta_label }}</a>
+      {% endif %}
+      <div class="tv-brand__stats">
+        {% for block in section.blocks %}
+          <div>
+            <span class="tv-brand__stat-num">{{ block.settings.number }}</span>
+            <div class="tv-brand__stat-label">{{ block.settings.label }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="tv-brand__visual">
+      {% if section.settings.image1 %}
+        <div class="tv-brand__img">
+          <img src="{{ section.settings.image1 | image_url: width: 600 }}" alt="Tailvani" loading="lazy" width="600" height="750"/>
+        </div>
+      {% endif %}
+      {% if section.settings.image2 %}
+        <div class="tv-brand__img">
+          <img src="{{ section.settings.image2 | image_url: width: 400 }}" alt="Tailvani" loading="lazy" width="400" height="280"/>
+        </div>
+      {% endif %}
+      {% if section.settings.image3 %}
+        <div class="tv-brand__img">
+          <img src="{{ section.settings.image3 | image_url: width: 400 }}" alt="Tailvani" loading="lazy" width="400" height="280"/>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+  <div class="tv-brand__bg-text" aria-hidden="true">Tailvani</div>
+</section>
+
+{% schema %}
+{
+  "name": "TV Brand Story",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Our Story" },
+    { "type": "textarea", "id": "title", "label": "Title", "default": "Built for the dog that goes everywhere with you." },
+    { "type": "textarea", "id": "body1", "label": "Paragraph 1", "default": "Tailvani was born from a simple truth: your dog is your plus-one. Coffee runs, brunch, the farmer's market — they're always there. So why shouldn't they look as put-together as you do?" },
+    { "type": "textarea", "id": "body2", "label": "Paragraph 2 (optional)", "default": "We design every piece with the millennial dog parent in mind — minimal, intentional, and built to move through real life." },
+    { "type": "text", "id": "cta_label", "label": "Button label", "default": "Read Our Story" },
+    { "type": "url", "id": "cta_url", "label": "Button URL" },
+    { "type": "image_picker", "id": "image1", "label": "Image 1 (tall, left)" },
+    { "type": "image_picker", "id": "image2", "label": "Image 2 (top right)" },
+    { "type": "image_picker", "id": "image3", "label": "Image 3 (bottom right)" }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat",
+      "settings": [
+        { "type": "text", "id": "number", "label": "Number", "default": "3" },
+        { "type": "text", "id": "label", "label": "Label", "default": "Signature pieces" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TV Brand Story",
+      "blocks": [
+        { "type": "stat", "settings": { "number": "3", "label": "Signature pieces" } },
+        { "type": "stat", "settings": { "number": "4", "label": "Social platforms" } },
+        { "type": "stat", "settings": { "number": "∞", "label": "Stylish moments" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

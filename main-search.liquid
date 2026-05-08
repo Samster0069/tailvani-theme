@@ -1,0 +1,37 @@
+<div style="max-width:1400px;margin:0 auto;padding:60px 40px 100px">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:300;color:#3D2B1F;margin-bottom:40px">
+    {% if search.performed %}
+      Search results for "{{ search.terms }}"
+    {% else %}
+      Search
+    {% endif %}
+  </h1>
+
+  <form action="{{ routes.search_url }}" method="get" style="display:flex;max-width:560px;border:1.5px solid #E8DFD0;border-radius:2px;overflow:hidden;margin-bottom:60px">
+    <input type="hidden" name="type" value="product"/>
+    <input type="text" name="q" value="{{ search.terms | escape }}" placeholder="Search for products..." style="flex:1;padding:14px 20px;border:none;outline:none;font-size:14px;font-family:inherit;background:transparent;color:#2A2420"/>
+    <button type="submit" style="background:#3D2B1F;color:#F5F0E8;padding:14px 24px;border:none;cursor:pointer;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;font-family:inherit">Search</button>
+  </form>
+
+  {% if search.performed %}
+    {% if search.results.size > 0 %}
+      <div class="tv-products-grid">
+        {% for result in search.results %}
+          {% if result.object_type == 'product' %}
+            {% render 'tailvani-product-card', product: result %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <p style="font-size:16px;color:#8C6E52">No results found for "{{ search.terms }}". Try a different search term.</p>
+    {% endif %}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Search",
+  "settings": [],
+  "presets": [{ "name": "Search" }]
+}
+{% endschema %}

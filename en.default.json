@@ -1,0 +1,79 @@
+{
+  "general": {
+    "password_page": {
+      "login_form_heading": "Enter store using password",
+      "login_form_password_label": "Password",
+      "login_form_password_placeholder": "Your password",
+      "login_form_submit": "Enter",
+      "signup_form_email_label": "Email",
+      "signup_form_success": "We will send you an email right before we open!",
+      "password_link": "Enter using password",
+      "powered_by_shopify_html": "This shop will be powered by {{ shopify }}"
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "refresh_page": "Refresh page",
+    "link_messages": {
+      "new_window": "Opens in a new window"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "on_sale": "Sale",
+      "quantity": {
+        "label": "Quantity",
+        "increase": "Increase quantity for {{ product }}",
+        "decrease": "Decrease quantity for {{ product }}"
+      }
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Cart",
+      "empty": "Your cart is currently empty.",
+      "continue_browsing_html": "<a href=\"/\">Continue shopping</a>",
+      "subtotal": "Subtotal",
+      "checkout": "Check Out",
+      "note": "Add a note to your order"
+    }
+  },
+  "collections": {
+    "general": {
+      "items_with_count_one": "{{ count }} item",
+      "items_with_count_other": "{{ count }} items"
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account",
+      "details": "Account Details",
+      "view_addresses": "View Addresses",
+      "return": "Return to Account Details"
+    },
+    "log_in": "Log in",
+    "log_out": "Log out",
+    "register": "Create Account",
+    "login_page": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign In",
+      "forgot_password": "Forgot your password?",
+      "guest_title": "Continue as Guest",
+      "guest_continue": "Continue"
+    }
+  },
+  "errors": {
+    "sold_out": "This product is sold out",
+    "quantity_too_high": "The quantity you entered is greater than the current stock.",
+    "404": {
+      "title": "Page not found",
+      "subtext": "The page you requested does not exist.",
+      "link": "Continue shopping"
+    }
+  }
+}

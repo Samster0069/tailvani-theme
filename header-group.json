@@ -1,0 +1,11 @@
+{
+  "sections": {
+    "header": {
+      "type": "tailvani-header",
+      "settings": {
+        "menu": "main-menu"
+      }
+    }
+  },
+  "order": ["header"]
+}

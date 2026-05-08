@@ -1,0 +1,38 @@
+<section style="max-width:1400px;margin:100px auto;padding:0 40px;">
+  <div class="tv-section-header tv-reveal">
+    <div>
+      <div class="tv-eyebrow">{{ section.settings.eyebrow }}</div>
+      <h2 class="tv-section-title">{{ section.settings.title }}</h2>
+    </div>
+    {% if section.settings.view_all_label != blank %}
+      <a class="tv-section-link" href="{{ section.settings.collection.url | default: '/collections/all' }}">
+        {{ section.settings.view_all_label }}
+        <svg viewBox="0 0 24 24" width="13" height="13" stroke="currentColor" fill="none" stroke-width="2">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+    {% endif %}
+  </div>
+
+  <div class="tv-products-grid">
+    {% assign featured = section.settings.collection.products | default: collections.all.products %}
+    {% for product in featured limit: section.settings.product_limit %}
+      {% render 'tailvani-product-card', product: product %}
+    {% endfor %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TV Featured Products",
+  "settings": [
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "The Collection" },
+    { "type": "text", "id": "title", "label": "Section title", "default": "Shop our essentials" },
+    { "type": "collection", "id": "collection", "label": "Collection" },
+    { "type": "range", "id": "product_limit", "label": "Products to show", "min": 2, "max": 6, "step": 1, "default": 3 },
+    { "type": "text", "id": "view_all_label", "label": "View all label", "default": "View all products" }
+  ],
+  "presets": [{ "name": "TV Featured Products" }]
+}
+{% endschema %}

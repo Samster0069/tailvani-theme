@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "tailvani-contact",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

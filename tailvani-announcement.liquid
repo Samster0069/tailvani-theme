@@ -1,0 +1,19 @@
+<div class="tv-announcement">
+  {{ section.settings.text }}
+  {% if section.settings.link_label != blank %}
+    &nbsp;·&nbsp;
+    <a href="{{ section.settings.link_url }}">{{ section.settings.link_label }}</a>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "TV Announcement Bar",
+  "settings": [
+    { "type": "text", "id": "text", "label": "Announcement text", "default": "Free US shipping on orders over $50" },
+    { "type": "text", "id": "link_label", "label": "Link label", "default": "Join the waitlist" },
+    { "type": "url", "id": "link_url", "label": "Link URL" }
+  ],
+  "presets": [{ "name": "TV Announcement Bar" }]
+}
+{% endschema %}

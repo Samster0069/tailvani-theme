@@ -1,0 +1,41 @@
+<div style="max-width:1000px;margin:0 auto;padding:60px 40px">
+  <h1 style="font-family:'Cormorant Garamond',serif;font-size:clamp(36px,4vw,54px);font-weight:300;color:#3D2B1F;margin-bottom:48px">Your Cart</h1>
+
+  {% if cart.item_count == 0 %}
+    <div style="text-align:center;padding:80px 0">
+      <div style="font-size:48px;margin-bottom:20px">🛍️</div>
+      <p style="font-size:16px;color:#8C6E52;margin-bottom:32px">Your cart is empty</p>
+      <a href="/collections/all" style="display:inline-flex;background:#3D2B1F;color:#F5F0E8;padding:16px 36px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;font-weight:500;border-radius:2px;text-decoration:none">Continue Shopping</a>
+    </div>
+  {% else %}
+    {% for item in cart.items %}
+      <div style="display:grid;grid-template-columns:100px 1fr;gap:24px;align-items:start;padding:24px 0;border-bottom:1px solid #E8DFD0">
+        <a href="{{ item.url }}">
+          <img src="{{ item.image | image_url: width: 200 }}" alt="{{ item.title }}" width="200" height="250" style="width:100%;border-radius:2px;object-fit:cover"/>
+        </a>
+        <div>
+          <a href="{{ item.url }}" style="font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:#3D2B1F;text-decoration:none;display:block;margin-bottom:6px">{{ item.product.title }}</a>
+          {% if item.variant.title != 'Default Title' %}
+            <p style="font-size:13px;color:#C4B49A;margin-bottom:12px">{{ item.variant.title }}</p>
+          {% endif %}
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+            <div style="font-size:16px;color:#2A2420;font-weight:400">{{ item.final_line_price | money }}</div>
+            <div style="display:flex;align-items:center;gap:0;border:1.5px solid #E8DFD0;border-radius:2px;overflow:hidden">
+              <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | minus: 1 }}" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:#3D2B1F;text-decoration:none;font-size:16px">−</a>
+              <span style="width:36px;text-align:center;font-size:14px;font-weight:500;color:#3D2B1F">{{ item.quantity }}</span>
+              <a href="{{ routes.cart_change_url }}?id={{ item.key }}&quantity={{ item.quantity | plus: 1 }}" style="width:36px;height:36px;display:flex;align-items:center;justify-content:center;color:#3D2B1F;text-decoration:none;font-size:16px">+</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "Cart Items",
+  "settings": [],
+  "presets": [{ "name": "Cart Items" }]
+}
+{% endschema %}

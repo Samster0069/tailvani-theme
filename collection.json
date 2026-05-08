@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "tailvani-collection-page",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}

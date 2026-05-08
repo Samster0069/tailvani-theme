@@ -1,0 +1,99 @@
+{% comment %}
+  tailvani-collection-page.liquid
+  WHERE: Sections/ → Add new section → name: tailvani-collection-page
+  THEN: Templates/ → collection.json
+        Replace "main-collection-product-grid" with "tailvani-collection-page"
+        OR add it above the existing grid section.
+{% endcomment %}
+
+<!-- COLLECTION HERO -->
+<section class="tv-collection-hero">
+  <div class="tv-collection-hero__inner">
+    <div>
+      <div class="tv-eyebrow">{{ section.settings.eyebrow | default: collection.title }}</div>
+      <h1 class="tv-collection-hero__title">
+        {{ section.settings.hero_title | default: collection.title }}
+      </h1>
+      {% if collection.description != blank %}
+        <p class="tv-collection-hero__sub">{{ collection.description }}</p>
+      {% elsif section.settings.hero_sub != blank %}
+        <p class="tv-collection-hero__sub">{{ section.settings.hero_sub }}</p>
+      {% endif %}
+    </div>
+
+    {% if section.settings.hero_image1 or section.settings.hero_image2 %}
+      <div class="tv-collection-hero__visual">
+        {% if section.settings.hero_image1 %}
+          <div class="tv-collection-hero__img">
+            <img src="{{ section.settings.hero_image1 | image_url: width: 600 }}" alt="" loading="eager" width="600"/>
+          </div>
+        {% endif %}
+        {% if section.settings.hero_image2 %}
+          <div class="tv-collection-hero__img">
+            <img src="{{ section.settings.hero_image2 | image_url: width: 400 }}" alt="" loading="eager" width="400"/>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+  <div class="tv-collection-hero__bg" aria-hidden="true">{{ collection.title }}</div>
+</section>
+
+<!-- FILTER + SORT BAR -->
+<div class="tv-shop-controls">
+  <div class="tv-filter-pills">
+    <span class="tv-filter-label">Filter:</span>
+    <button class="tv-filter-pill is-active" data-filter="all">All</button>
+    <button class="tv-filter-pill" data-filter="apparel">Apparel</button>
+    <button class="tv-filter-pill" data-filter="accessories">Accessories</button>
+    <button class="tv-filter-pill" data-filter="sale">On Sale</button>
+    <button class="tv-filter-pill" data-filter="new-arrival">New Arrivals</button>
+  </div>
+  <div class="tv-sort-row">
+    <span class="tv-sort-label">Sort:</span>
+    <select class="tv-sort-select" onchange="window.location.href=this.value">
+      <option value="?sort_by=manual"           {% if collection.sort_by == 'manual' %}selected{% endif %}>Featured</option>
+      <option value="?sort_by=price-ascending"  {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low to High</option>
+      <option value="?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High to Low</option>
+      <option value="?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+      <option value="?sort_by=best-selling"     {% if collection.sort_by == 'best-selling' %}selected{% endif %}>Best Selling</option>
+    </select>
+    <span class="tv-count-label" id="tv-product-count">{{ collection.products_count }} products</span>
+  </div>
+</div>
+
+<!-- PRODUCT GRID -->
+<div style="max-width:1400px;margin:0 auto;padding:40px 40px 100px">
+  <div class="tv-products-grid" id="tv-products-grid">
+    {% for product in collection.products %}
+      <div data-category="{{ product.tags | join: ' ' }}">
+        {% render 'tailvani-product-card', product: product %}
+      </div>
+    {% else %}
+      <p style="grid-column:1/-1;text-align:center;color:var(--tv-taupe);padding:80px 0;">
+        No products found in this collection.
+      </p>
+    {% endfor %}
+  </div>
+
+  <!-- PAGINATION -->
+  {% if paginate.pages > 1 %}
+    <div style="text-align:center;margin-top:60px">
+      {% render 'pagination', paginate: paginate %}
+    </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "TV Collection Page",
+  "settings": [
+    { "type": "text",         "id": "eyebrow",    "label": "Eyebrow text" },
+    { "type": "text",         "id": "hero_title",  "label": "Hero title (overrides collection name)" },
+    { "type": "textarea",     "id": "hero_sub",    "label": "Hero subtitle (overrides collection description)" },
+    { "type": "image_picker", "id": "hero_image1", "label": "Hero image 1" },
+    { "type": "image_picker", "id": "hero_image2", "label": "Hero image 2" }
+  ],
+  "presets": [{ "name": "TV Collection Page" }]
+}
+{% endschema %}

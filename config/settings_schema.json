@@ -2,44 +2,30 @@
   {
     "name": "theme_info",
     "theme_name": "Tailvani",
-    "theme_version": "1.0.0",
+    "theme_version": "2.0.0",
     "theme_author": "Tailvani",
     "theme_documentation_url": "https://shoptailvani.com",
     "theme_support_url": "https://shoptailvani.com"
   },
   {
-    "name": "Colors",
+    "name": "Logo",
     "settings": [
-      { "type": "color", "id": "colors_text", "label": "Body text", "default": "#2A2420" },
-      { "type": "color", "id": "colors_background_1", "label": "Background 1", "default": "#FDFAF5" },
-      { "type": "color", "id": "colors_background_2", "label": "Background 2", "default": "#F5F0E8" },
-      { "type": "color", "id": "colors_button", "label": "Button background", "default": "#3D2B1F" },
-      { "type": "color", "id": "colors_solid_button_labels", "label": "Button label", "default": "#F5F0E8" },
-      { "type": "color", "id": "colors_outline_button_labels", "label": "Outline button label", "default": "#3D2B1F" },
-      { "type": "color", "id": "colors_accent_1", "label": "Accent 1", "default": "#8C6E52" },
-      { "type": "color", "id": "colors_accent_2", "label": "Accent 2", "default": "#C4523A" }
-    ]
-  },
-  {
-    "name": "Typography",
-    "settings": [
-      { "type": "font_picker", "id": "type_header_font", "label": "Heading font", "default": "cormorant_garamond_n3" },
-      { "type": "font_picker", "id": "type_body_font", "label": "Body font", "default": "dm_sans_n4" }
-    ]
-  },
-  {
-    "name": "Favicon",
-    "settings": [
-      { "type": "image_picker", "id": "favicon", "label": "Favicon image" }
-    ]
-  },
-  {
-    "name": "Social media",
-    "settings": [
-      { "type": "url", "id": "social_instagram_link", "label": "Instagram", "default": "https://www.instagram.com/tailvani/" },
-      { "type": "url", "id": "social_tiktok_link", "label": "TikTok", "default": "https://www.tiktok.com/@tailvani" },
-      { "type": "url", "id": "social_facebook_link", "label": "Facebook" },
-      { "type": "url", "id": "social_pinterest_link", "label": "Pinterest" }
+      {
+        "type": "image_picker",
+        "id": "logo",
+        "label": "Logo image",
+        "info": "Upload your logo here. If left blank, your shop name is shown as text."
+      },
+      {
+        "type": "range",
+        "id": "logo_width",
+        "min": 60,
+        "max": 300,
+        "step": 4,
+        "unit": "px",
+        "label": "Logo width (desktop)",
+        "default": 160
+      }
     ]
   }
 ]

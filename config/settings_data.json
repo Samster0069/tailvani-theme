@@ -10,7 +10,25 @@
     "colors_button": "#3D2B1F",
     "type_header_font": "cormorant_garamond_n3",
     "type_body_font": "dm_sans_n4",
-    "favicon": ""
+    "favicon": "",
+    "logo": "",
+    "logo_width": 160,
+    "social_instagram_link": "https://www.instagram.com/tailvani/",
+    "social_tiktok_link": "https://www.tiktok.com/@tailvani",
+    "social_facebook_link": "https://www.facebook.com/profile.php?id=61570794040680",
+    "social_pinterest_link": "https://www.pinterest.com/tailvaniandco/",
+    "social_twitter_link": "",
+    "social_youtube_link": "",
+    "social_snapchat_link": "",
+    "social_tumblr_link": "",
+    "social_vimeo_link": "",
+    "cart_type": "notification",
+    "cart_icon": "bag",
+    "predictive_search_enabled": true,
+    "predictive_search_show_price": true,
+    "predictive_search_show_vendor": false,
+    "animations_reveal_on_scroll": true,
+    "animations_hover_products": true
   },
   "presets": {}
 }

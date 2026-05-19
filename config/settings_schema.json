@@ -23,8 +23,157 @@
         "max": 300,
         "step": 4,
         "unit": "px",
-        "label": "Logo width (desktop)",
+        "label": "Logo width desktop",
         "default": 160
+      }
+    ]
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      { "type": "color", "id": "colors_text", "label": "Body text", "default": "#2A2420" },
+      { "type": "color", "id": "colors_background_1", "label": "Background 1", "default": "#FDFAF5" },
+      { "type": "color", "id": "colors_background_2", "label": "Background 2", "default": "#F5F0E8" },
+      { "type": "color", "id": "colors_button", "label": "Button background", "default": "#3D2B1F" },
+      { "type": "color", "id": "colors_solid_button_labels", "label": "Button label", "default": "#F5F0E8" },
+      { "type": "color", "id": "colors_outline_button_labels", "label": "Outline button label", "default": "#3D2B1F" },
+      { "type": "color", "id": "colors_accent_1", "label": "Accent 1", "default": "#8C6E52" },
+      { "type": "color", "id": "colors_accent_2", "label": "Accent 2", "default": "#C4523A" }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading font",
+        "default": "cormorant_garamond_n3"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body font",
+        "default": "dm_sans_n4"
+      }
+    ]
+  },
+  {
+    "name": "Favicon",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "favicon",
+        "label": "Favicon"
+      }
+    ]
+  },
+  {
+    "name": "Social media",
+    "settings": [
+      { "type": "url", "id": "social_instagram_link", "label": "Instagram" },
+      { "type": "url", "id": "social_tiktok_link", "label": "TikTok" },
+      { "type": "url", "id": "social_facebook_link", "label": "Facebook" },
+      { "type": "url", "id": "social_pinterest_link", "label": "Pinterest" },
+      { "type": "url", "id": "social_twitter_link", "label": "X / Twitter" },
+      { "type": "url", "id": "social_youtube_link", "label": "YouTube" },
+      { "type": "url", "id": "social_snapchat_link", "label": "Snapchat" },
+      { "type": "url", "id": "social_tumblr_link", "label": "Tumblr" },
+      { "type": "url", "id": "social_vimeo_link", "label": "Vimeo" }
+    ]
+  },
+  {
+    "name": "Cart",
+    "settings": [
+      {
+        "type": "select",
+        "id": "cart_type",
+        "label": "Cart type",
+        "options": [
+          { "value": "page", "label": "Page" },
+          { "value": "notification", "label": "Notification" }
+        ],
+        "default": "notification"
+      },
+      {
+        "type": "select",
+        "id": "cart_icon",
+        "label": "Cart icon",
+        "options": [
+          { "value": "cart", "label": "Cart" },
+          { "value": "bag", "label": "Bag" }
+        ],
+        "default": "bag"
+      }
+    ]
+  },
+  {
+    "name": "Search",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "predictive_search_enabled",
+        "label": "Enable predictive search",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_price",
+        "label": "Show product price in search suggestions",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "predictive_search_show_vendor",
+        "label": "Show product vendor in search suggestions",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Brand footer bio",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "brand_image",
+        "label": "Brand image"
+      },
+      {
+        "type": "range",
+        "id": "brand_image_width",
+        "min": 50,
+        "max": 300,
+        "step": 5,
+        "unit": "px",
+        "label": "Brand image width",
+        "default": 100
+      },
+      {
+        "type": "inline_richtext",
+        "id": "brand_headline",
+        "label": "Brand headline"
+      },
+      {
+        "type": "richtext",
+        "id": "brand_description",
+        "label": "Brand description"
+      }
+    ]
+  },
+  {
+    "name": "Animations",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "animations_reveal_on_scroll",
+        "label": "Reveal sections on scroll",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "animations_hover_products",
+        "label": "Show second image on product hover",
+        "default": true
       }
     ]
   }

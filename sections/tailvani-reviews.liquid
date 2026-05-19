@@ -1,55 +1,184 @@
-<section class="tv-reviews">
-  <div class="tv-section-header tv-reveal">
-    <div>
-      <div class="tv-eyebrow">{{ section.settings.eyebrow }}</div>
-      <h2 class="tv-section-title">{{ section.settings.title }}</h2>
+{% comment %}
+  tailvani-reviews.liquid
+  ───────────────────────
+  REVIEWS powered by Judge.me (or any review app).
+  No hardcoded fake reviews — all reviews come from the app.
+
+  HOW TO SET UP:
+  1. Install Judge.me Product Reviews from the Shopify App Store
+  2. In the Theme Editor, click this section → Add block → App
+  3. Select the Judge.me reviews widget
+  4. Customise the widget display settings in Judge.me's app settings
+
+  For a homepage "All Reviews" carousel, use Judge.me's
+  "All Reviews Widget" or "Preview Badge" widget type.
+{% endcomment %}
+
+<section class="tv-reviews" id="reviews" aria-label="{{ section.settings.title }}">
+  <div class="tv-reviews__wrap">
+
+    <!-- Section heading -->
+    <div class="tv-section-header tv-reveal">
+      {%- if section.settings.eyebrow != blank -%}
+        <div class="tv-eyebrow">{{ section.settings.eyebrow }}</div>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="tv-section-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.subtitle != blank -%}
+        <p class="tv-reviews__subtitle tv-reveal tv-reveal--d1">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
     </div>
-  </div>
-  <div class="tv-reviews__grid">
-    {% for block in section.blocks %}
-      <div class="tv-review-card tv-reveal">
-        <div class="tv-review-card__quote">"</div>
-        <div class="tv-review-card__stars">★★★★★</div>
-        <p class="tv-review-card__text">{{ block.settings.review }}</p>
-        <div class="tv-review-card__author">
-          <div class="tv-review-card__avatar">{{ block.settings.emoji }}</div>
-          <div>
-            <div class="tv-review-card__name">{{ block.settings.name }}</div>
-            <div class="tv-review-card__pet">{{ block.settings.pet }}</div>
-          </div>
-        </div>
+
+    <!-- App blocks area — Judge.me (and other apps) render here -->
+    {%- if section.blocks.size > 0 -%}
+      <div class="tv-reviews__app-area">
+        {%- for block in section.blocks -%}
+          {%- if block.type == '@app' -%}
+            <div class="tv-reviews__app-block" {{ block.shopify_attributes }}>
+              {% render block %}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
       </div>
-    {% endfor %}
+
+    {%- else -%}
+      <!-- Placeholder shown until a reviews app is connected -->
+      <div class="tv-reviews__placeholder tv-reveal tv-reveal--d1">
+        <div class="tv-reviews__placeholder-stars">★★★★★</div>
+        <p class="tv-reviews__placeholder-title">Reviews powered by Judge.me</p>
+        <p class="tv-reviews__placeholder-body">
+          Install <strong>Judge.me Product Reviews</strong> from the Shopify App Store,
+          then add it here as an <em>App block</em> in the theme editor.
+          Real reviews from real customers will display automatically.
+        </p>
+        <a
+          class="tv-reviews__placeholder-cta"
+          href="https://apps.shopify.com/judge-me-product-reviews"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Install Judge.me →
+        </a>
+      </div>
+    {%- endif -%}
+
   </div>
 </section>
+
+<style>
+  .tv-reviews__wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 40px;
+  }
+  .tv-reviews__subtitle {
+    font-size: 15px;
+    color: #6B5B4E;
+    margin-top: 12px;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 520px;
+  }
+  .tv-reviews__app-area {
+    margin-top: 48px;
+  }
+  .tv-reviews__app-block + .tv-reviews__app-block {
+    margin-top: 24px;
+  }
+
+  /* ── PLACEHOLDER ─────────────────────────────────────── */
+  .tv-reviews__placeholder {
+    margin-top: 48px;
+    background: var(--tv-cream);
+    border: 1.5px dashed var(--tv-sand);
+    border-radius: 6px;
+    padding: 60px 40px;
+    text-align: center;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tv-reviews__placeholder-stars {
+    font-size: 28px;
+    letter-spacing: 3px;
+    color: var(--tv-mocha);
+    margin-bottom: 20px;
+  }
+  .tv-reviews__placeholder-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 24px;
+    font-weight: 400;
+    color: var(--tv-espresso);
+    margin: 0 0 14px;
+    line-height: 1.2;
+  }
+  .tv-reviews__placeholder-body {
+    font-size: 14px;
+    line-height: 1.8;
+    color: #6B5B4E;
+    margin: 0 0 28px;
+    font-weight: 300;
+  }
+  .tv-reviews__placeholder-body strong { color: var(--tv-espresso); font-weight: 500; }
+  .tv-reviews__placeholder-body em     { font-style: italic; }
+  .tv-reviews__placeholder-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--tv-espresso);
+    color: var(--tv-cream);
+    padding: 13px 30px;
+    font-size: 12px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 2px;
+    text-decoration: none;
+    transition: background .22s, transform .18s;
+  }
+  .tv-reviews__placeholder-cta:hover {
+    background: var(--tv-mocha);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 600px) {
+    .tv-reviews__wrap { padding: 60px 24px; }
+    .tv-reviews__placeholder { padding: 40px 24px; }
+  }
+</style>
 
 {% schema %}
 {
   "name": "TV Reviews",
   "settings": [
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Customer Love" },
-    { "type": "text", "id": "title", "label": "Title", "default": "What dog parents say" }
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow label",
+      "default": "Customer Love"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section heading",
+      "default": "What dog parents say"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subheading (optional)",
+      "info": "A short line under the heading. Leave blank to hide."
+    }
   ],
   "blocks": [
     {
-      "type": "review",
-      "name": "Review",
-      "settings": [
-        { "type": "textarea", "id": "review", "label": "Review text", "default": "The quality is incredible and my dog gets compliments everywhere we go." },
-        { "type": "text", "id": "name", "label": "Reviewer name", "default": "Sarah M." },
-        { "type": "text", "id": "pet", "label": "Pet description", "default": "Dog mom to Biscuit, Golden Retriever" },
-        { "type": "text", "id": "emoji", "label": "Avatar emoji", "default": "🐕" }
-      ]
+      "type": "@app"
     }
   ],
   "presets": [
     {
-      "name": "TV Reviews",
-      "blocks": [
-        { "type": "review", "settings": { "review": "The Classic Bowtie is the most complimented thing my dog has ever worn. Stopped three times on our morning walk.", "name": "Sarah M.", "pet": "Dog mom to Biscuit, Golden Retriever", "emoji": "🐕" } },
-        { "type": "review", "settings": { "review": "Finally a pet brand that gets it. The aesthetic is everything I wanted — minimal, stylish, not cutesy.", "name": "Jordan K.", "pet": "Dog mom to Luna, French Bulldog", "emoji": "🐾" } },
-        { "type": "review", "settings": { "review": "Ordered the Ribbed Collar Vest and it arrived so fast. Quality is honestly better than I expected.", "name": "Alex T.", "pet": "Dog dad to Mochi, Shih Tzu", "emoji": "🦮" } }
-      ]
+      "name": "TV Reviews"
     }
   ]
 }

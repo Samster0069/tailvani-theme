@@ -3,7 +3,11 @@
     "header": {
       "type": "tailvani-header",
       "settings": {
-        "menu": "main-menu"
+        "menu": "main-menu",
+        "instagram": "https://www.instagram.com/tailvani/",
+        "tiktok": "https://www.tiktok.com/@tailvani",
+        "facebook": "https://www.facebook.com/profile.php?id=61570794040680",
+        "pinterest": "https://www.pinterest.com/tailvaniandco/"
       }
     }
   },
